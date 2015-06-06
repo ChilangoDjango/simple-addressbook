@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Directorio</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Directorio</a>
+      {% if user.is_authenticated %}
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="{% url 'contacts:login' %}">Login</a></li>
+          <li><a href="{% url 'contacts:singup' %}">Singup</a></li>
+        </ul>
+      {% else %}
+        <p>no</p>
+      {% endif %}
+    </div>
+  </nav>
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+</body>
+</html>
