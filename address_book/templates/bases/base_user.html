@@ -15,8 +15,8 @@
       {% if user.is_authenticated %}
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="{% url 'contacts:show_contacts' %}">Contactos</a></li>
-          <li><!-- <a href="{% url 'contacts:show_groups' %}">Grupos</a> --></li>
-          <li><!-- <a href="{% url 'contacts:logout' %}">Salir</a> --></li>
+          <li><a href="{% url 'contacts:show_groups' %}">Grupos</a></li>
+          <li><a href="{% url 'contacts:logout' %}">Salir</a></li>
         </ul>
       {% else %}
         <p>no</p>

@@ -41,6 +41,11 @@ def singup(request):
         form = UserCreationForm()
         return render(request, template_response, {'form': form})
 
+def logout_user(request):
+    logout(request)
+    return redirect(reverse('contacts:login'))
+
+
 def new_contact(request):
     template_response = 'contacts/new_contact.html'
     if request.method == 'POST':
@@ -59,6 +64,11 @@ def show_contacts(request):
     contacts = models.Contact.objects.filter(user=request.user)
     print contacts
     return render(request, template_response, {'contacts': contacts})
+
+def show_contact(request, id_contact):
+    template_response = 'contacts/show_contact.html'
+    contact = models.Contact.objects.get(pk=id_contact)
+    return render(request, template_response, {'contact': contact})
 
 
 def edit_contact(request, id_contact):
@@ -79,3 +89,42 @@ def delete_contact(request, id_contact):
     contact = models.Contact.objects.get(pk=id_contact, user=request.user)
     contact.delete()
     return redirect(reverse('contacts:show_contacts'))
+
+################# Contactos ###############################################
+
+def new_group(request):
+    template_response = 'groups/new_group.html'
+    if request.method == 'POST':
+        form = forms.GroupForm(request.POST)
+        if form.is_valid():
+            form.save(usuario=request.user)
+            return redirect(reverse('contacts:show_groups'))
+        else:
+            return render(request, template_response, {'form': form})
+    else:
+        form = forms.GroupForm()
+        return render(request, template_response, {'form': form})
+
+def show_groups(request):
+    template_response = 'groups/show_group.html'
+    groups = models.Group.objects.filter(user=request.user)
+    return render(request, template_response, {'groups': groups})
+
+def edit_group(request, id_group):
+    template_response = 'groups/edit_group.html'
+    group = models.Group.objects.get(pk=id_group, user=request.user)
+    if request.method == 'POST':
+        form = forms.GroupForm(request.POST, instance=group)
+        if form.is_valid():
+            form.save(usuario=request.user)
+            return redirect(reverse('contacts:show_groups'))
+        else:
+            return render(request, template_response, {'form': form})
+    else:
+        form = forms.GroupForm(instance=group)
+        return render(request, template_response, {'form': form})
+
+def delete_group(request, id_group):
+    group = models.Group.objects.get(pk=id_group, user=request.user)
+    group.delete()
+    return redirect(reverse('contacts:show_groups'))
