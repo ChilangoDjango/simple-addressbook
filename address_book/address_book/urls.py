@@ -19,7 +19,7 @@ from contacts import views as contacts_v
 
 urlpatterns = [
     url(r'^$', contacts_v.home, name='home'),
-    url(r'^contacts/', include('contacts.urls', namespace='contacts')),
+    url(r'^address/', include('contacts.urls', namespace='contacts')),
 
     url(r'^admin/', include(admin.site.urls)),
 ]

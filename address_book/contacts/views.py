@@ -46,7 +46,7 @@ def new_contact(request):
     if request.method == 'POST':
         form = forms.ContactForm(request.POST)
         if form.is_valid():
-            form.save(user=request.user)
+            form.save(usuario=request.user)
             return redirect(reverse('contacts:show_contacts'))
         else:
             return render(request, template_response, {'form': form})
@@ -57,6 +57,7 @@ def new_contact(request):
 def show_contacts(request):
     template_response = 'contacts/show_contacts.html'
     contacts = models.Contact.objects.filter(user=request.user)
+    print contacts
     return render(request, template_response, {'contacts': contacts})
 
 
@@ -66,7 +67,7 @@ def edit_contact(request, id_contact):
     if request.method == 'POST':
         form = forms.ContactForm(request.POST, instance=contact)
         if form.is_valid():
-            form.save(user=request.user)
+            form.save(usuario=request.user)
             return redirect(reverse('contacts:show_contacts'))
         else:
             return render(request, template_response, {'form': form})

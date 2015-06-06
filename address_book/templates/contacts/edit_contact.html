@@ -1,0 +1,11 @@
+{% extends 'bases/base_user.html' %}
+
+{% block content %}
+  <h2>Editar contacto</h2>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn waves-effect waves-light" type="submit" name="action">Editar
+     </button>
+  </form>
+{% endblock %}
