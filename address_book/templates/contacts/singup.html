@@ -4,5 +4,9 @@
   <form action="" method="POST">
     {% csrf_token %}
     {{ form }}
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Registrarse
+     </button>
   </form>
+
 {% endblock %}
